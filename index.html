@@ -403,7 +403,6 @@
 
   /* ---------- About / Contact ---------- */
   .about-toggle-wrap {
-    margin-left: auto;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -413,6 +412,10 @@
     padding: 0;
     font-family: inherit;
     cursor: pointer;
+  }
+
+  .about-toggle-wrap:first-of-type {
+    margin-left: auto;
   }
 
   .about-hint {
@@ -555,12 +558,21 @@
     <h1>Kräuteralm</h1>
     <p>PFERDE - & HUNDEBERATUNG &middot; ERFAHRUNG &amp; KRÄUTERWISSEN</p>
   </div>
-  <button class="about-toggle-wrap" id="aboutToggle" type="button" aria-label="Über mich & Kontakt" aria-expanded="false">
-    <span class="about-hint">Über mich & Kontakt</span>
+  <button class="about-toggle-wrap" id="aboutToggle" type="button" aria-label="Über mich" aria-expanded="false">
+    <span class="about-hint">Über mich</span>
     <span class="about-toggle-icon">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="8" r="3.4" stroke="#F1E9D8" stroke-width="1.6"/>
         <path d="M4.5 20c1.4-4 4.2-6 7.5-6s6.1 2 7.5 6" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </span>
+  </button>
+  <button class="about-toggle-wrap" id="contactToggle" type="button" aria-label="Kontakt" aria-expanded="false">
+    <span class="about-hint">Kontakt</span>
+    <span class="about-toggle-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6.5A1.5 1.5 0 015.5 5h13A1.5 1.5 0 0120 6.5v11a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 17.5v-11z" stroke="#F1E9D8" stroke-width="1.6"/>
+        <path d="M4.8 6.2l7.2 6 7.2-6" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
   </button>
@@ -569,7 +581,7 @@
 <div class="about-overlay" id="aboutOverlay">
   <div class="about-panel">
     <button class="about-close" id="aboutClose" type="button" aria-label="Schließen">&times;</button>
-    <h2>Über mich & Kontakt</h2>
+    <h2>Über mich</h2>
     <p class="about-name">Peter Sebastian Oberholzner</p>
     <div class="about-bio">
       <p class="bio-subhead">Ein Leben im Takt der Hufe</p>
@@ -586,8 +598,13 @@
         <li><strong>Verfügbarkeit:</strong> Ich halte stets einen handverlesenen Vorrat bereit. Wenn du für dein Tier naturreine, traditionell verarbeitete Kräuterkraft suchst, gebe ich bei passendem Bedarf gerne etwas aus meiner Schatzkammer ab.</li>
       </ul>
     </div>
+  </div>
+</div>
 
-    <h2>Kontakt</h2>
+<div class="about-overlay" id="contactOverlay">
+  <div class="about-panel">
+    <button class="about-close" id="contactClose" type="button" aria-label="Schließen">&times;</button>
+    <h2>Kontakt & Kräuterbestellung</h2>
     <div class="contact-list">
       <a class="contact-item" href="https://wa.me/4915146972842" target="_blank" rel="noopener">
         <span>📞</span> WhatsApp: 0151 46972842
@@ -606,7 +623,7 @@
       <path d="M23 12V37" stroke="#8A7458" stroke-width="1.2"/>
       <path d="M23 18L18 22M23 18L28 22M23 25L19 28.5M23 25L27 28.5" stroke="#8A7458" stroke-width="1" stroke-linecap="round"/>
     </svg>
-    <h2>Deines Pferdes oder Hundes ausführlich</h2>
+    <h2>Wie können wir deinem Pferd oder Hund helfen?</h2>
     <p>Ob Lahmheit, Hautproblem, Unruhe oder eine Frage zur Fütterung — beschreib die Situation, und wir schauen sie uns gemeinsam an, mit Fachwissen und alpiner Kräuterkunde.</p>
   </div>
 </div>
@@ -713,6 +730,26 @@ FOTOS UND VIDEOS:
   aboutClose.addEventListener('click', closeAbout);
   aboutOverlay.addEventListener('click', (e) => {
     if (e.target === aboutOverlay) closeAbout();
+  });
+
+  const contactToggle = document.getElementById('contactToggle');
+  const contactOverlay = document.getElementById('contactOverlay');
+  const contactClose = document.getElementById('contactClose');
+
+  function openContact() {
+    contactOverlay.classList.add('open');
+    contactToggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeContact() {
+    contactOverlay.classList.remove('open');
+    contactToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  contactToggle.addEventListener('click', openContact);
+  contactClose.addEventListener('click', closeContact);
+  contactOverlay.addEventListener('click', (e) => {
+    if (e.target === contactOverlay) closeContact();
   });
 
   const emailContact = document.getElementById('emailContact');
