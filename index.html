@@ -45,6 +45,8 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+    row-gap: 8px;
     flex-shrink: 0;
     box-shadow: 0 3px 10px rgba(22, 40, 31, 0.25);
     transition: padding 0.25s ease;
@@ -414,8 +416,11 @@
     cursor: pointer;
   }
 
-  .about-toggle-wrap:first-of-type {
+  .header-actions {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
   }
 
   .about-hint {
@@ -561,24 +566,26 @@
     <h1>Kräuteralm</h1>
     <p>PFERDE - & HUNDEBERATUNG &middot; ERFAHRUNG &amp; KRÄUTERWISSEN</p>
   </div>
-  <button class="about-toggle-wrap" id="aboutToggle" type="button" aria-label="Über mich" aria-expanded="false">
-    <span class="about-hint">Über mich</span>
-    <span class="about-toggle-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="8" r="3.4" stroke="#F1E9D8" stroke-width="1.6"/>
-        <path d="M4.5 20c1.4-4 4.2-6 7.5-6s6.1 2 7.5 6" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-    </span>
-  </button>
-  <button class="about-toggle-wrap" id="contactToggle" type="button" aria-label="Kontakt & Kräuterbestellung" aria-expanded="false">
-    <span class="about-hint">Kontakt & Kräuterbestellung</span>
-    <span class="about-toggle-icon">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-        <path d="M4 6.5A1.5 1.5 0 015.5 5h13A1.5 1.5 0 0120 6.5v11a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 17.5v-11z" stroke="#F1E9D8" stroke-width="1.6"/>
-        <path d="M4.8 6.2l7.2 6 7.2-6" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </span>
-  </button>
+  <div class="header-actions">
+    <button class="about-toggle-wrap" id="aboutToggle" type="button" aria-label="Über mich" aria-expanded="false">
+      <span class="about-hint">Über mich</span>
+      <span class="about-toggle-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="8" r="3.4" stroke="#F1E9D8" stroke-width="1.6"/>
+          <path d="M4.5 20c1.4-4 4.2-6 7.5-6s6.1 2 7.5 6" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
+    <button class="about-toggle-wrap" id="contactToggle" type="button" aria-label="Kontakt & Kräuterbestellung" aria-expanded="false">
+      <span class="about-hint">Kontakt & Kräuterbestellung</span>
+      <span class="about-toggle-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M4 6.5A1.5 1.5 0 015.5 5h13A1.5 1.5 0 0120 6.5v11a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 17.5v-11z" stroke="#F1E9D8" stroke-width="1.6"/>
+          <path d="M4.8 6.2l7.2 6 7.2-6" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </button>
+  </div>
 </header>
 
 <div class="about-overlay" id="aboutOverlay">
