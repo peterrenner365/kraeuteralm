@@ -549,6 +549,30 @@
     color: var(--wood-soft);
     cursor: pointer;
   }
+
+  .app-footer {
+    text-align: center;
+    padding: 8px 16px calc(8px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+
+  .footer-link {
+    background: none;
+    border: none;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
+    color: var(--wood-soft);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .footer-dot {
+    color: var(--wood-soft);
+    font-size: 11px;
+  }
 </style>
 </head>
 <body>
@@ -626,6 +650,46 @@
   </div>
 </div>
 
+<div class="about-overlay" id="impressumOverlay">
+  <div class="about-panel">
+    <button class="about-close" id="impressumClose" type="button" aria-label="Schließen">&times;</button>
+    <h2>Impressum</h2>
+    <div class="about-bio">
+      <p>Angaben gemäß § 5 TMG</p>
+      <p>Peter Sebastian Oberholzner<br>Freischaffender Künstler<br>Hauptstraße 18<br>83483 Bischofswiesen</p>
+      <p class="bio-subhead">Kontakt</p>
+      <p>Telefon (WhatsApp): 0151 46972842<br>E-Mail: peterrenner10@t-online.de</p>
+      <p class="bio-subhead">Umsatzsteuer</p>
+      <p>Gemäß § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
+      <p class="bio-subhead">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</p>
+      <p>Peter Sebastian Oberholzner (Anschrift wie oben)</p>
+      <p class="bio-subhead">Haftungshinweis</p>
+      <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehme ich keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+    </div>
+  </div>
+</div>
+
+<div class="about-overlay" id="datenschutzOverlay">
+  <div class="about-panel">
+    <button class="about-close" id="datenschutzClose" type="button" aria-label="Schließen">&times;</button>
+    <h2>Datenschutzerklärung</h2>
+    <div class="about-bio">
+      <p class="bio-subhead">1. Verantwortlicher</p>
+      <p>Peter Sebastian Oberholzner, Hauptstraße 18, 83483 Bischofswiesen, peterrenner10@t-online.de</p>
+      <p class="bio-subhead">2. Hosting</p>
+      <p>Diese Website wird über Vercel Inc. (USA) gehostet. Beim Aufruf der Seite werden automatisch Verbindungsdaten (u. a. IP-Adresse, Datum, Uhrzeit, aufgerufene Seite) in Server-Logs verarbeitet. Dies dient der technischen Bereitstellung und Sicherheit der Seite.</p>
+      <p class="bio-subhead">3. Kräuterberatungs-Chat</p>
+      <p>Wenn du den Chat nutzt, wird deine eingegebene Nachricht (sowie ggf. hochgeladene Fotos) zur Erstellung einer Antwort an Anthropic PBC (USA) übermittelt, den Anbieter der verwendeten KI. Der Gesprächsverlauf wird ausschließlich in deinem Browser gespeichert und nicht auf einem Server abgelegt – er geht verloren, sobald du die Seite schließt oder neu lädst. Ich als Betreiber habe keinen Einblick in die geführten Chats. Bitte gib im Chat keine besonders sensiblen persönlichen Daten ein.</p>
+      <p class="bio-subhead">4. Kontaktaufnahme</p>
+      <p>Nutzt du den WhatsApp- oder E-Mail-Kontakt, verarbeite ich die von dir übermittelten Daten (Name, Nachricht, Kontaktdaten) zur Bearbeitung deiner Anfrage. Bei WhatsApp gilt zusätzlich die Datenschutzerklärung von Meta/WhatsApp, auf deren Verarbeitung ich keinen Einfluss habe.</p>
+      <p class="bio-subhead">5. Google Fonts</p>
+      <p>Diese Seite lädt Schriftarten von Servern von Google (Google Ireland Limited bzw. Google LLC). Dabei wird deine IP-Adresse an Google übermittelt.</p>
+      <p class="bio-subhead">6. Deine Rechte</p>
+      <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch bezüglich deiner personenbezogenen Daten. Wende dich dazu an die oben genannte Kontaktadresse. Außerdem hast du ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde.</p>
+    </div>
+  </div>
+</div>
+
 <div class="chat-scroll" id="chatScroll">
   <div class="empty-state" id="emptyState">
     <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
@@ -661,6 +725,12 @@
   </div>
   <p class="disclaimer">Kräuteralm ersetzt keinen Tierarzt. Bei Notfällen immer sofort tierärztliche Hilfe holen.</p>
 </div>
+
+<footer class="app-footer">
+  <button class="footer-link" id="impressumToggle" type="button">Impressum</button>
+  <span class="footer-dot">·</span>
+  <button class="footer-link" id="datenschutzToggle" type="button">Datenschutz</button>
+</footer>
 
 <script>
   const SYSTEM_PROMPT = `Du bist ein erfahrener, empathischer digitaler Tierberater und Kräuterexperte für Pferde und Hunde. Deine Aufgabe ist es, Tierbesitzern bei Problemen mit ihrem Pferd oder Hund mit Fachwissen aus dem Internet und bewährter traditioneller Naturheilkunde (insbesondere alpinen Heilkräutern) zur Seite zu stehen.
@@ -762,6 +832,26 @@ FOTOS UND VIDEOS:
   contactOverlay.addEventListener('click', (e) => {
     if (e.target === contactOverlay) closeContact();
   });
+
+  function makeSimpleOverlay(toggleId, overlayId, closeId) {
+    const toggle = document.getElementById(toggleId);
+    const overlay = document.getElementById(overlayId);
+    const close = document.getElementById(closeId);
+    function open() {
+      overlay.classList.add('open');
+    }
+    function shut() {
+      overlay.classList.remove('open');
+    }
+    toggle.addEventListener('click', open);
+    close.addEventListener('click', shut);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) shut();
+    });
+  }
+
+  makeSimpleOverlay('impressumToggle', 'impressumOverlay', 'impressumClose');
+  makeSimpleOverlay('datenschutzToggle', 'datenschutzOverlay', 'datenschutzClose');
 
   const emailContact = document.getElementById('emailContact');
   const emailLabel = document.getElementById('emailLabel');
