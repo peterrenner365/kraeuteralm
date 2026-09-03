@@ -157,19 +157,6 @@
     display: block;
   }
 
-  .bubble-video-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 10px;
-    padding: 6px 10px;
-    font-size: 12px;
-    max-width: 160px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 
   .bubble-wrap.advisor { max-width: 92%; }
 
@@ -323,27 +310,6 @@
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-
-  .attach-chip.video {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    padding: 4px;
-    text-align: center;
-  }
-
-  .attach-chip.video .video-icon { font-size: 16px; }
-  .attach-chip.video .video-name {
-    font-size: 8.5px;
-    color: var(--wood-soft);
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 52px;
   }
 
   .attach-remove {
@@ -712,14 +678,14 @@
       aria-label="Nachricht eingeben"
     ></textarea>
     <div class="input-row-bottom">
-      <button class="attach-btn" id="attachBtn" type="button" aria-label="Foto oder Video anhängen">
+      <button class="attach-btn" id="attachBtn" type="button" aria-label="Foto anhängen">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <path d="M4 8a2 2 0 012-2h1.2l1-1.6A2 2 0 0110 3.5h4a2 2 0 011.8.9L17 6h1a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
           <circle cx="12" cy="13" r="3.2" stroke="currentColor" stroke-width="1.6"/>
         </svg>
-        Foto/Video
+        Foto
       </button>
-      <input type="file" id="fileInput" accept="image/*,video/*" multiple style="display:none">
+      <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
       <button class="send" id="sendBtn" type="button">Senden</button>
     </div>
   </div>
@@ -766,9 +732,8 @@ STRUKTUR JEDER ANTWORT:
 TONFALL:
 - Nahbar, fundiert, respektvoll und tiergerecht. Duz-Form für eine vertrauensvolle, persönliche Atmosphäre.
 
-FOTOS UND VIDEOS:
-- Der Kunde kann Fotos anhängen. Schau dir angehängte Fotos genau an und beziehe sichtbare Details (z. B. Schwellung, Wundbild, Haltung, Fellzustand) konkret in deine Einschätzung ein.
-- Videos kannst du nicht auswerten, auch wenn im Text ein Video erwähnt wird. Bitte den Kunden in dem Fall kurz in Worten zu beschreiben, was im Video zu sehen ist, oder weise freundlich auf die Kontakt-Möglichkeit per WhatsApp hin, falls das Bewegtbild für die Einschätzung wichtig sein könnte.`;
+FOTOS:
+- Der Kunde kann Fotos anhängen. Schau dir angehängte Fotos genau an und beziehe sichtbare Details (z. B. Schwellung, Wundbild, Haltung, Fellzustand) konkret in deine Einschätzung ein.`;
 
   const chatScroll = document.getElementById('chatScroll');
   const emptyState = document.getElementById('emptyState');
@@ -781,7 +746,6 @@ FOTOS UND VIDEOS:
   let history = [];
   let isLoading = false;
   let attachedImages = [];
-  let attachedVideos = [];
   const MAX_ATTACHMENTS = 4;
 
   userInput.addEventListener('keydown', (e) => {
@@ -947,12 +911,6 @@ FOTOS UND VIDEOS:
       chip.innerHTML = `<img src="${item.dataUrl}" alt="Angehängtes Foto"><button class="attach-remove" type="button" aria-label="Foto entfernen" data-id="${item.id}" data-kind="image">&times;</button>`;
       attachPreview.appendChild(chip);
     });
-    attachedVideos.forEach((item) => {
-      const chip = document.createElement('div');
-      chip.className = 'attach-chip video';
-      chip.innerHTML = `<span class="video-icon">🎬</span><span class="video-name">${escapeHtml(item.name)}</span><button class="attach-remove" type="button" aria-label="Video entfernen" data-id="${item.id}" data-kind="video">&times;</button>`;
-      attachPreview.appendChild(chip);
-    });
   }
 
   attachBtn.addEventListener('click', () => fileInput.click());
@@ -961,8 +919,8 @@ FOTOS UND VIDEOS:
     const files = Array.from(fileInput.files || []);
     fileInput.value = '';
     for (const file of files) {
-      if (attachedImages.length + attachedVideos.length >= MAX_ATTACHMENTS) {
-        addErrorMessage('Du kannst maximal ' + MAX_ATTACHMENTS + ' Dateien pro Nachricht anhängen.');
+      if (attachedImages.length >= MAX_ATTACHMENTS) {
+        addErrorMessage('Du kannst maximal ' + MAX_ATTACHMENTS + ' Fotos pro Nachricht anhängen.');
         break;
       }
       if (file.type.startsWith('image/')) {
@@ -972,8 +930,6 @@ FOTOS UND VIDEOS:
         } catch (err) {
           console.error('Kräuteralm: Bild konnte nicht verarbeitet werden', err);
         }
-      } else if (file.type.startsWith('video/')) {
-        attachedVideos.push({ id: 'vid_' + Date.now() + '_' + Math.random().toString(36).slice(2), name: file.name });
       }
     }
     renderAttachPreview();
@@ -983,17 +939,12 @@ FOTOS UND VIDEOS:
     const btn = e.target.closest('.attach-remove');
     if (!btn) return;
     const id = btn.getAttribute('data-id');
-    if (btn.getAttribute('data-kind') === 'image') {
-      attachedImages = attachedImages.filter((i) => i.id !== id);
-    } else {
-      attachedVideos = attachedVideos.filter((i) => i.id !== id);
-    }
+    attachedImages = attachedImages.filter((i) => i.id !== id);
     renderAttachPreview();
   });
 
-  function addUserMessage(text, images, videos) {
+  function addUserMessage(text, images) {
     images = images || [];
-    videos = videos || [];
     emptyState.remove();
     document.querySelector('.app-header').classList.add('compact');
     document.querySelector('.input-bar').classList.add('compact');
@@ -1001,10 +952,9 @@ FOTOS UND VIDEOS:
     row.className = 'msg-row user';
 
     let mediaHtml = '';
-    if (images.length || videos.length) {
+    if (images.length) {
       mediaHtml += '<div class="bubble-media">';
       images.forEach((img) => { mediaHtml += `<img src="${img.dataUrl}" alt="Angehängtes Foto">`; });
-      videos.forEach((vid) => { mediaHtml += `<span class="bubble-video-chip">🎬 ${escapeHtml(vid.name)}</span>`; });
       mediaHtml += '</div>';
     }
     const textHtml = text ? `<p class="bubble-text">${escapeHtml(text)}</p>` : '';
@@ -1051,22 +1001,15 @@ FOTOS UND VIDEOS:
 
   async function sendMessage() {
     const text = userInput.value.trim();
-    const hasAttachments = attachedImages.length > 0 || attachedVideos.length > 0;
+    const hasAttachments = attachedImages.length > 0;
     if ((!text && !hasAttachments) || isLoading) return;
 
     const imagesToSend = attachedImages.slice();
-    const videosToSend = attachedVideos.slice();
 
     let messageText = text;
-    if (videosToSend.length) {
-      const videoNote = videosToSend.length === 1
-        ? `(Video angehängt: ${videosToSend[0].name} – bitte bei Bedarf um eine kurze Beschreibung bitten oder auf die WhatsApp-Kontaktmöglichkeit hinweisen, falls das Video für die Einschätzung wichtig ist.)`
-        : `(${videosToSend.length} Videos angehängt – bitte bei Bedarf um eine kurze Beschreibung bitten oder auf die WhatsApp-Kontaktmöglichkeit hinweisen.)`;
-      messageText = messageText ? `${messageText}\n\n${videoNote}` : videoNote;
-    }
     if (!messageText) messageText = '(Foto angehängt, keine weitere Beschreibung)';
 
-    addUserMessage(text, imagesToSend, videosToSend);
+    addUserMessage(text, imagesToSend);
 
     const contentBlocks = imagesToSend.map((img) => ({
       type: 'image',
@@ -1078,7 +1021,6 @@ FOTOS UND VIDEOS:
     userInput.value = '';
     userInput.blur();
     attachedImages = [];
-    attachedVideos = [];
     renderAttachPreview();
     isLoading = true;
     sendBtn.disabled = true;
