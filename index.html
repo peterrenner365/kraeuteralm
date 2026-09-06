@@ -242,6 +242,29 @@
     gap: 10px;
   }
 
+  .contact-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .contact-fields input {
+    flex: 1;
+    min-width: 140px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    color: var(--wood);
+  }
+
+  .contact-fields input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
   textarea {
     width: 100%;
     resize: vertical;
@@ -670,6 +693,10 @@
 
 <div class="input-bar">
   <div class="input-inner">
+    <div class="contact-fields">
+      <input type="text" id="customerName" placeholder="Dein Name (optional)" aria-label="Dein Name">
+      <input type="text" id="customerContact" placeholder="WhatsApp-Nr. oder E-Mail für Rückmeldung (optional)" aria-label="Kontakt für Rückmeldung">
+    </div>
     <div class="attach-preview" id="attachPreview"></div>
     <textarea
       id="userInput"
@@ -1029,12 +1056,16 @@ FOTOS:
     chatScroll.scrollIntoView({ block: 'start' });
 
     try {
+      const customerName = document.getElementById('customerName').value.trim();
+      const customerContact = document.getElementById('customerContact').value.trim();
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           system: SYSTEM_PROMPT,
-          messages: history
+          messages: history,
+          customerName: customerName,
+          customerContact: customerContact
         })
       });
 
