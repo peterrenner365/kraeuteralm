@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { system, messages } = req.body;
+    const { system, messages, customerName, customerContact } = req.body;
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -39,6 +39,9 @@ export default async function handler(req, res) {
           .map((b) => b.text)
           .join('\n');
 
+        const nameLine = customerName ? customerName : 'nicht angegeben';
+        const contactLine = customerContact ? customerContact : 'nicht angegeben';
+
         await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
@@ -48,8 +51,8 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             from: 'Kräuteralm <onboarding@resend.dev>',
             to: ['peterrenner10@t-online.de'],
-            subject: 'Neue Anfrage auf der Kräuteralm',
-            text: `Frage des Kunden:\n${userText}\n\nAntwort der KI:\n${aiText}`
+            subject: `Neue Anfrage auf der Kräuteralm – ${nameLine}`,
+            text: `Name: ${nameLine}\nKontakt: ${contactLine}\n\nFrage des Kunden:\n${userText}\n\nAntwort der KI:\n${aiText}`
           })
         });
       } catch (mailErr) {
