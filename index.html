@@ -461,7 +461,14 @@
     padding: 26px 22px 22px;
     max-height: 86vh;
     overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  .about-panel * {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .about-panel h2 {
@@ -1273,7 +1280,7 @@ FOTOS:
         addErrorMessage('Keine Antwort erhalten. Magst du es nochmal versuchen?');
       } else {
         addAdvisorMessage(reply);
-        history.push({ role: 'assistant', content: reply });
+        history.push({ role: 'assistant', content: reply });A
       }
     } catch (err) {
       removeTypingIndicator();
