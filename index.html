@@ -514,6 +514,55 @@
     gap: 8px;
   }
 
+  .waitlist-cta-text {
+    margin-top: 14px !important;
+    font-style: italic;
+    color: var(--pine);
+  }
+
+  .waitlist-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pine);
+  }
+
+  .waitlist-label input {
+    font-weight: 400;
+    color: var(--wood);
+    border: 1.5px solid var(--line);
+    background: #fff;
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+  }
+
+  .waitlist-label input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .waitlist-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--wood);
+    cursor: pointer;
+  }
+
+  .waitlist-checkbox input {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--pine);
+  }
+
   .contact-item {
     display: flex;
     align-items: center;
@@ -588,6 +637,15 @@
         </svg>
       </span>
     </button>
+    <button class="about-toggle-wrap" id="waitlistToggle" type="button" aria-label="Herbst-Startliste" aria-expanded="false">
+      <span class="about-hint">Herbst-Startliste</span>
+      <span class="about-toggle-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3.5c2 2.4 4 5.4 4 8.4a4 4 0 01-8 0c0-3 2-6 4-8.4z" stroke="#F1E9D8" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M12 15.5V20" stroke="#F1E9D8" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
     <button class="about-toggle-wrap" id="contactToggle" type="button" aria-label="Kontakt & Kräuterbestellung" aria-expanded="false">
       <span class="about-hint">Kontakt & Kräuterbestellung</span>
       <span class="about-toggle-icon">
@@ -619,6 +677,53 @@
         <li><strong>Vielseitige Veredelung:</strong> Je nach Pflanze stelle ich daraus wirkungsvolle Mazerate (Sonnenölauszüge), feine Kräuterpulver, Balsame und individuelle Mischungen her.</li>
         <li><strong>Verfügbarkeit:</strong> Ich halte stets einen handverlesenen Vorrat bereit. Wenn du für dein Tier naturreine, traditionell verarbeitete Kräuterkraft suchst, gebe ich bei passendem Bedarf gerne etwas aus meiner Schatzkammer ab.</li>
       </ul>
+    </div>
+  </div>
+</div>
+
+<div class="about-overlay" id="waitlistOverlay">
+  <div class="about-panel" id="waitlistPanel">
+    <button class="about-close" id="waitlistClose" type="button" aria-label="Schließen">&times;</button>
+    <div id="waitlistFormView">
+      <h2>Herbst-Startliste für dein Pferd</h2>
+      <p class="about-bio"><strong>Der Fellwechsel und die Umstellung in die kühle Jahreszeit sind für viele Pferde eine besondere Zeit.</strong> Bei Kräuteralm entsteht gerade eine kleine, sorgfältig vorbereitete Herbst-Auswahl mit Kräuterprodukten, Belohnungsstückchen und persönlichen Informationen zur täglichen Pferderoutine.</p>
+      <p class="about-bio">Ich stelle meine Produkte nicht anonym in großen Mengen her. Jede Mischung soll nachvollziehbar, sauber verarbeitet und mit klaren Hinweisen zur Anwendung versehen sein.</p>
+      <p class="bio-subhead">Das bekommst du über die Herbst-Startliste</p>
+      <ul class="about-bio">
+        <li>Informationen, sobald ein Produkt verfügbar ist</li>
+        <li>Einblicke in Zutaten, Herstellung und Herkunft</li>
+        <li>Hinweise zu Packungsgröße, Preis und Anwendung</li>
+        <li>Zugang zu begrenzten Kennenlern-Angeboten</li>
+        <li>Auf Wunsch einen Termin für ein persönliches Kräuteralm-Kennenlerngespräch</li>
+      </ul>
+      <p class="disclaimer" style="margin-top:14px;">Wichtig: Die Kräuteralm-Informationen dienen der allgemeinen Orientierung rund um Fütterung und Pflege. Sie ersetzen keine tierärztliche Diagnose oder Behandlung. Bei Beschwerden, Medikamentengabe, Turnierstarts oder Unsicherheit bitte zuerst tierärztlichen Rat einholen.</p>
+
+      <form id="waitlistForm" style="margin-top:18px; display:flex; flex-direction:column; gap:10px;">
+        <label class="waitlist-label">Dein Vorname
+          <input type="text" id="waitlistName" required>
+        </label>
+        <label class="waitlist-label">WhatsApp-Nummer oder E-Mail-Adresse
+          <input type="text" id="waitlistContact" required>
+        </label>
+        <p class="bio-subhead" style="margin-bottom:2px;">Was interessiert dich?</p>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Herbst-Kräuterprodukte für Pferde"> Herbst-Kräuterprodukte für Pferde</label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Belohnungsstückchen / Leckerlis"> Belohnungsstückchen / Leckerlis</label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Mazerate und Pflegeprodukte"> Mazerate und Pflegeprodukte</label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Persönliches Kennenlerngespräch"> Persönliches Kennenlerngespräch</label>
+        <label class="waitlist-checkbox" style="margin-top:6px;">
+          <input type="checkbox" id="waitlistConsent" required>
+          Ich möchte von Kräuteralm einmalig über den Herbst-Start informiert werden. Meine Angaben werden entsprechend der <a href="#" id="waitlistDatenschutzLink" style="color:var(--pine); text-decoration:underline;">Datenschutzerklärung</a> verarbeitet. Ich kann diese Einwilligung jederzeit widerrufen.
+        </label>
+        <p id="waitlistError" style="display:none; color:#a33; font-size:13px; margin:2px 0 0;"></p>
+        <button type="submit" class="send" id="waitlistSubmit" style="width:100%; margin-top:4px;">Unverbindlich auf die Herbst-Startliste</button>
+      </form>
+    </div>
+
+    <div id="waitlistThanksView" style="display:none;">
+      <h2 id="waitlistThanksHeading">Danke!</h2>
+      <p class="about-bio" id="waitlistThanksText">Dein Platz auf der Kräuteralm-Herbst-Startliste ist vorgemerkt.</p>
+      <p class="about-bio">Peter meldet sich persönlich, sobald es Neuigkeiten zur Herbst-Auswahl gibt. Wenn du ein Kennenlerngespräch ausgewählt hast, erhältst du zusätzlich passende Terminvorschläge.</p>
+      <p class="about-bio"><em>Von Herzen für dein Pferd – deine Kräuteralm.</em></p>
     </div>
   </div>
 </div>
@@ -687,6 +792,8 @@
     </svg>
     <h2>Was ist mit deinem Pferd oder Hund los?</h2>
     <p>Beschreib es hier einfach – du bekommst sofort Rat und Tat, inklusive Vorschlägen aus meiner Kräuterkammer vom Watzmann. Du kannst auch gern ein Foto deines Pferdes oder Hundes mitschicken, z. B. von der betroffenen Stelle. Ich sammle heimische Wild- und Heilkräuter selbst, trockne und verarbeite sie sorgfältig zu Mazeraten, Salben und Kräuterpulvern für Pferd und Hund.</p>
+    <p class="waitlist-cta-text">Die Kräuteralm-Herbst-Auswahl entsteht in kleinen Chargen. Jetzt unverbindlich vormerken lassen und persönlich informiert werden.</p>
+    <button type="button" class="send" id="waitlistCtaBtn" style="margin-top:4px;">Zur Herbst-Startliste</button>
   </div>
 </div>
 
@@ -823,6 +930,81 @@ FOTOS:
     if (e.target === contactOverlay) closeContact();
   });
 
+  const waitlistToggle = document.getElementById('waitlistToggle');
+  const waitlistOverlay = document.getElementById('waitlistOverlay');
+  const waitlistClose = document.getElementById('waitlistClose');
+  const waitlistCtaBtn = document.getElementById('waitlistCtaBtn');
+  const waitlistForm = document.getElementById('waitlistForm');
+  const waitlistFormView = document.getElementById('waitlistFormView');
+  const waitlistThanksView = document.getElementById('waitlistThanksView');
+  const waitlistError = document.getElementById('waitlistError');
+  const waitlistSubmit = document.getElementById('waitlistSubmit');
+  const waitlistDatenschutzLink = document.getElementById('waitlistDatenschutzLink');
+
+  function openWaitlist() {
+    waitlistOverlay.classList.add('open');
+    waitlistToggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeWaitlist() {
+    waitlistOverlay.classList.remove('open');
+    waitlistToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  waitlistToggle.addEventListener('click', openWaitlist);
+  waitlistCtaBtn.addEventListener('click', openWaitlist);
+  waitlistClose.addEventListener('click', closeWaitlist);
+  waitlistOverlay.addEventListener('click', (e) => {
+    if (e.target === waitlistOverlay) closeWaitlist();
+  });
+
+  waitlistDatenschutzLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('datenschutzOverlay').classList.add('open');
+  });
+
+  waitlistForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    waitlistError.style.display = 'none';
+
+    const name = document.getElementById('waitlistName').value.trim();
+    const contact = document.getElementById('waitlistContact').value.trim();
+    const consent = document.getElementById('waitlistConsent').checked;
+    const interests = Array.from(document.querySelectorAll('#waitlistForm input[name="interest"]:checked')).map((el) => el.value);
+
+    if (!name || !contact) {
+      waitlistError.textContent = 'Bitte trag deinen Vornamen und deine WhatsApp-Nr. oder E-Mail ein.';
+      waitlistError.style.display = 'block';
+      return;
+    }
+    if (!consent) {
+      waitlistError.textContent = 'Bitte bestätige die Einwilligung, damit wir dich informieren dürfen.';
+      waitlistError.style.display = 'block';
+      return;
+    }
+
+    waitlistSubmit.disabled = true;
+    waitlistSubmit.textContent = 'Wird gesendet …';
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, contact, interests })
+      });
+      if (!response.ok) throw new Error('Anfrage fehlgeschlagen');
+
+      document.getElementById('waitlistThanksHeading').textContent = 'Danke, ' + name + '!';
+      waitlistFormView.style.display = 'none';
+      waitlistThanksView.style.display = 'block';
+    } catch (err) {
+      waitlistError.textContent = 'Leider hat das Absenden nicht funktioniert. Bitte versuch es gleich noch einmal oder schreib Peter direkt über WhatsApp oder E-Mail.';
+      waitlistError.style.display = 'block';
+      waitlistSubmit.disabled = false;
+      waitlistSubmit.textContent = 'Unverbindlich auf die Herbst-Startliste';
+    }
+  });
+
   function makeSimpleOverlay(toggleId, overlayId, closeId) {
     const toggle = document.getElementById(toggleId);
     const overlay = document.getElementById(overlayId);
@@ -843,261 +1025,4 @@ FOTOS:
   makeSimpleOverlay('impressumToggle', 'impressumOverlay', 'impressumClose');
   makeSimpleOverlay('datenschutzToggle', 'datenschutzOverlay', 'datenschutzClose');
 
-  const emailContact = document.getElementById('emailContact');
-  const emailLabel = document.getElementById('emailLabel');
-  const EMAIL_ADDRESS = 'peterrenner10@t-online.de';
-
-  emailContact.addEventListener('click', async (e) => {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      try {
-        await navigator.clipboard.writeText(EMAIL_ADDRESS);
-        const original = emailLabel.textContent;
-        emailLabel.textContent = 'Adresse kopiert – zum Einfügen bereit ✓';
-        setTimeout(() => { emailLabel.textContent = original; }, 3000);
-      } catch (err) {
-        /* Kopieren nicht möglich, mailto-Link versucht es trotzdem */
-      }
-    }
-  });
-
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
-  function renderAdvisorText(raw) {
-    // Light markdown: **bold**, line-based paragraphs and "- " lists
-    const lines = raw.split('\n');
-    let html = '';
-    let inList = false;
-    for (let line of lines) {
-      const trimmed = line.trim();
-      if (trimmed === '') {
-        if (inList) { html += '</ul>'; inList = false; }
-        continue;
-      }
-      if (/^[-•]\s+/.test(trimmed)) {
-        if (!inList) { html += '<ul>'; inList = true; }
-        html += `<li>${formatInline(trimmed.replace(/^[-•]\s+/, ''))}</li>`;
-      } else {
-        if (inList) { html += '</ul>'; inList = false; }
-        html += `<p>${formatInline(trimmed)}</p>`;
-      }
-    }
-    if (inList) html += '</ul>';
-    return html;
-  }
-
-  function formatInline(text) {
-    const escaped = escapeHtml(text);
-    return escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  }
-
-  function downscaleImage(file, maxDim, quality) {
-    maxDim = maxDim || 1280;
-    quality = quality || 0.82;
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => reject(reader.error);
-      reader.onload = () => {
-        const img = new Image();
-        img.onerror = () => reject(new Error('Bild konnte nicht geladen werden'));
-        img.onload = () => {
-          let width = img.naturalWidth;
-          let height = img.naturalHeight;
-          if (width > maxDim || height > maxDim) {
-            if (width >= height) {
-              height = Math.round(height * (maxDim / width));
-              width = maxDim;
-            } else {
-              width = Math.round(width * (maxDim / height));
-              height = maxDim;
-            }
-          }
-          const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-          const dataUrl = canvas.toDataURL('image/jpeg', quality);
-          resolve({ dataUrl, base64: dataUrl.split(',')[1], mediaType: 'image/jpeg' });
-        };
-        img.src = reader.result;
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-
-  function renderAttachPreview() {
-    attachPreview.innerHTML = '';
-    attachedImages.forEach((item) => {
-      const chip = document.createElement('div');
-      chip.className = 'attach-chip';
-      chip.innerHTML = `<img src="${item.dataUrl}" alt="Angehängtes Foto"><button class="attach-remove" type="button" aria-label="Foto entfernen" data-id="${item.id}" data-kind="image">&times;</button>`;
-      attachPreview.appendChild(chip);
-    });
-  }
-
-  attachBtn.addEventListener('click', () => fileInput.click());
-
-  fileInput.addEventListener('change', async () => {
-    const files = Array.from(fileInput.files || []);
-    fileInput.value = '';
-    for (const file of files) {
-      if (attachedImages.length >= MAX_ATTACHMENTS) {
-        addErrorMessage('Du kannst maximal ' + MAX_ATTACHMENTS + ' Fotos pro Nachricht anhängen.');
-        break;
-      }
-      if (file.type.startsWith('image/')) {
-        try {
-          const img = await downscaleImage(file);
-          attachedImages.push(Object.assign({ id: 'img_' + Date.now() + '_' + Math.random().toString(36).slice(2) }, img));
-        } catch (err) {
-          console.error('Kräuteralm: Bild konnte nicht verarbeitet werden', err);
-        }
-      }
-    }
-    renderAttachPreview();
-  });
-
-  attachPreview.addEventListener('click', (e) => {
-    const btn = e.target.closest('.attach-remove');
-    if (!btn) return;
-    const id = btn.getAttribute('data-id');
-    attachedImages = attachedImages.filter((i) => i.id !== id);
-    renderAttachPreview();
-  });
-
-  function addUserMessage(text, images) {
-    images = images || [];
-    emptyState.remove();
-    document.querySelector('.app-header').classList.add('compact');
-    document.querySelector('.input-bar').classList.add('compact');
-    const row = document.createElement('div');
-    row.className = 'msg-row user';
-
-    let mediaHtml = '';
-    if (images.length) {
-      mediaHtml += '<div class="bubble-media">';
-      images.forEach((img) => { mediaHtml += `<img src="${img.dataUrl}" alt="Angehängtes Foto">`; });
-      mediaHtml += '</div>';
-    }
-    const textHtml = text ? `<p class="bubble-text">${escapeHtml(text)}</p>` : '';
-
-    row.innerHTML = `<div class="bubble user">${mediaHtml}${textHtml}</div>`;
-    chatScroll.appendChild(row);
-    chatScroll.scrollTop = chatScroll.scrollHeight;
-  }
-
-  function addTypingIndicator() {
-    const row = document.createElement('div');
-    row.className = 'msg-row advisor';
-    row.id = 'typingRow';
-    row.innerHTML = `<div class="bubble advisor"><div class="typing"><span></span><span></span><span></span></div></div>`;
-    chatScroll.appendChild(row);
-    chatScroll.scrollTop = chatScroll.scrollHeight;
-  }
-
-  function removeTypingIndicator() {
-    const el = document.getElementById('typingRow');
-    if (el) el.remove();
-  }
-
-  function addAdvisorMessage(text) {
-    const wrap = document.createElement('div');
-    wrap.className = 'msg-row advisor';
-
-    wrap.innerHTML = `
-      <div class="bubble-wrap advisor">
-        <p class="advisor-label">KRÄUTERALM</p>
-        <div class="bubble advisor">${renderAdvisorText(text)}</div>
-      </div>`;
-    chatScroll.appendChild(wrap);
-    chatScroll.scrollTop = chatScroll.scrollHeight;
-  }
-
-  function addErrorMessage(msg) {
-    const row = document.createElement('div');
-    row.className = 'msg-row advisor';
-    row.innerHTML = `<div class="error-note">${escapeHtml(msg)}</div>`;
-    chatScroll.appendChild(row);
-    chatScroll.scrollTop = chatScroll.scrollHeight;
-  }
-
-  async function sendMessage() {
-    const text = userInput.value.trim();
-    const hasAttachments = attachedImages.length > 0;
-    if ((!text && !hasAttachments) || isLoading) return;
-
-    const customerName = document.getElementById('customerName').value.trim();
-    const customerContact = document.getElementById('customerContact').value.trim();
-    if (!customerName || !customerContact) {
-      addErrorMessage('Bitte trag oben deinen Namen und deine WhatsApp-Nr. oder E-Mail ein, damit Peter dir antworten kann.');
-      return;
-    }
-
-    const imagesToSend = attachedImages.slice();
-
-    let messageText = text;
-    if (!messageText) messageText = '(Foto angehängt, keine weitere Beschreibung)';
-
-    addUserMessage(text, imagesToSend);
-
-    const contentBlocks = imagesToSend.map((img) => ({
-      type: 'image',
-      source: { type: 'base64', media_type: img.mediaType, data: img.base64 }
-    }));
-    contentBlocks.push({ type: 'text', text: messageText });
-
-    history.push({ role: 'user', content: contentBlocks });
-    userInput.value = '';
-    userInput.blur();
-    attachedImages = [];
-    renderAttachPreview();
-    isLoading = true;
-    sendBtn.disabled = true;
-    attachBtn.disabled = true;
-    addTypingIndicator();
-    chatScroll.scrollIntoView({ block: 'start' });
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system: SYSTEM_PROMPT,
-          messages: history,
-          customerName: customerName,
-          customerContact: customerContact
-        })
-      });
-
-      if (!response.ok) throw new Error('Anfrage fehlgeschlagen (' + response.status + ')');
-
-      const data = await response.json();
-      const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text);
-      const reply = textBlocks.join('\n').trim();
-
-      removeTypingIndicator();
-
-      if (!reply) {
-        addErrorMessage('Keine Antwort erhalten. Magst du es nochmal versuchen?');
-      } else {
-        addAdvisorMessage(reply);
-        history.push({ role: 'assistant', content: reply });
-      }
-    } catch (err) {
-      removeTypingIndicator();
-      addErrorMessage('Verbindung zur Beratung ist gerade gestört. Bitte versuch es gleich nochmal.');
-      console.error('Kräuteralm API error:', err);
-    } finally {
-      isLoading = false;
-      sendBtn.disabled = false;
-      attachBtn.disabled = false;
-    }
-  }
-</script>
-
-</body>
-</html>
+  const emailContact 
