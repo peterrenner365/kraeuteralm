@@ -563,6 +563,12 @@
     accent-color: var(--pine);
   }
 
+  .waitlist-checkbox span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
   .contact-item {
     display: flex;
     align-items: center;
@@ -706,13 +712,13 @@
           <input type="text" id="waitlistContact" required>
         </label>
         <p class="bio-subhead" style="margin-bottom:2px;">Was interessiert dich?</p>
-        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Herbst-Kräuterprodukte für Pferde"> Herbst-Kräuterprodukte für Pferde</label>
-        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Belohnungsstückchen / Leckerlis"> Belohnungsstückchen / Leckerlis</label>
-        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Mazerate und Pflegeprodukte"> Mazerate und Pflegeprodukte</label>
-        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Persönliches Kennenlerngespräch"> Persönliches Kennenlerngespräch</label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Herbst-Kräuterprodukte für Pferde"><span>Herbst-Kräuterprodukte für Pferde</span></label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Belohnungsstückchen / Leckerlis"><span>Belohnungsstückchen / Leckerlis</span></label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Mazerate und Pflegeprodukte"><span>Mazerate und Pflegeprodukte</span></label>
+        <label class="waitlist-checkbox"><input type="checkbox" name="interest" value="Persönliches Kennenlerngespräch"><span>Persönliches Kennenlerngespräch</span></label>
         <label class="waitlist-checkbox" style="margin-top:6px;">
           <input type="checkbox" id="waitlistConsent" required>
-          Ich möchte von Kräuteralm einmalig über den Herbst-Start informiert werden. Meine Angaben werden entsprechend der <a href="#" id="waitlistDatenschutzLink" style="color:var(--pine); text-decoration:underline;">Datenschutzerklärung</a> verarbeitet. Ich kann diese Einwilligung jederzeit widerrufen.
+          <span>Ich möchte von Kräuteralm einmalig über den Herbst-Start informiert werden. Meine Angaben werden entsprechend der <a href="#" id="waitlistDatenschutzLink" style="color:var(--pine); text-decoration:underline;">Datenschutzerklärung</a> verarbeitet. Ich kann diese Einwilligung jederzeit widerrufen.</span>
         </label>
         <p id="waitlistError" style="display:none; color:#a33; font-size:13px; margin:2px 0 0;"></p>
         <button type="submit" class="send" id="waitlistSubmit" style="width:100%; margin-top:4px;">Unverbindlich auf die Herbst-Startliste</button>
@@ -1272,14 +1278,4 @@ FOTOS:
     } catch (err) {
       removeTypingIndicator();
       addErrorMessage('Verbindung zur Beratung ist gerade gestört. Bitte versuch es gleich nochmal.');
-      console.error('Kräuteralm API error:', err);
-    } finally {
-      isLoading = false;
-      sendBtn.disabled = false;
-      attachBtn.disabled = false;
-    }
-  }
-</script>
-
-</body>
-</html>
+      console.error('Kräuteralm API err
