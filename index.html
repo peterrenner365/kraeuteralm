@@ -1278,4 +1278,14 @@ FOTOS:
     } catch (err) {
       removeTypingIndicator();
       addErrorMessage('Verbindung zur Beratung ist gerade gestört. Bitte versuch es gleich nochmal.');
-      console.error('Kräuteralm API err
+      console.error('Kräuteralm API error:', err);
+    } finally {
+      isLoading = false;
+      sendBtn.disabled = false;
+      attachBtn.disabled = false;
+    }
+  }
+</script>
+
+</body>
+</html>
