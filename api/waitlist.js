@@ -24,8 +24,8 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           from: 'Kräuteralm <onboarding@resend.dev>',
           to: ['peterrenner10@t-online.de'],
-          subject: `Neue Anmeldung: Herbst-Startliste – ${name}`,
-          text: `Neue Anmeldung zur Herbst-Startliste\n\nVorname: ${name}\nKontakt: ${contact}\n\nInteressiert an:\n${interestLines}`
+          subject: `Neue Bestellung: Herbstangebot – ${name}`,
+          text: `Neue Bestellung über das Herbstangebot\n\nName: ${name}\nKontakt: ${contact}\n\nAusgewählt:\n${interestLines}`
         })
       });
     }
