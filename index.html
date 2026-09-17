@@ -407,8 +407,11 @@
   .header-actions {
     margin-left: auto;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: center;
     gap: 14px;
+    row-gap: 10px;
   }
 
   .about-hint {
@@ -514,6 +517,29 @@
 
   .about-bio li { margin-bottom: 5px; }
   .about-bio li:last-child { margin-bottom: 0; }
+
+  .herb-card {
+    margin: 0 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(138,116,88,0.18);
+  }
+  .herb-card:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .herb-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--pine);
+    font-size: 14px;
+    margin: 0 0 3px;
+  }
+  .herb-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--wood-soft);
+    text-transform: uppercase;
+  }
+  .herb-effect { font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--wood); }
+  .herb-warning { font-size: 12.5px; line-height: 1.5; margin: 4px 0 0; color: #a33; }
 
   .contact-list {
     display: flex;
@@ -659,6 +685,16 @@
         </svg>
       </span>
     </button>
+    <button class="about-toggle-wrap" id="kraeuterToggle" type="button" aria-label="Kräutervorrat" aria-expanded="false">
+      <span class="about-hint">Kräutervorrat</span>
+      <span class="about-toggle-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M7 8h10v10a2 2 0 01-2 2H9a2 2 0 01-2-2V8z" stroke="#F1E9D8" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 8V6a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#F1E9D8" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9.5 11.5v5M12 11.5v5M14.5 11.5v5" stroke="#F1E9D8" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
     <button class="about-toggle-wrap" id="contactToggle" type="button" aria-label="Kontakt & Kräuterbestellung" aria-expanded="false">
       <span class="about-hint">Kontakt & Kräuterbestellung</span>
       <span class="about-toggle-icon">
@@ -743,6 +779,182 @@
       <p class="about-bio" id="waitlistThanksText">Deine Bestellung ist bei mir eingegangen.</p>
       <p class="about-bio">Ich melde mich persönlich bei dir, um Bezahlung und Versand zu besprechen. Wenn du ein persönliches Infogespräch ausgewählt hast, schlage ich dir zusätzlich einen Termin vor.</p>
       <p class="about-bio"><em>Von Herzen für dein Pferd – deine Kräuteralm.</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="about-overlay" id="kraeuterOverlay">
+  <div class="about-panel">
+    <button class="about-close" id="kraeuterClose" type="button" aria-label="Schließen">&times;</button>
+    <h2>Momentaner Kräutervorrat</h2>
+    <div class="about-bio">
+      <p>Das sind die Kräuter, die ich aktuell frisch geerntet, schonend getrocknet und vakuumiert vorrätig habe:</p>
+      <p class="bio-subhead">Auf einen Blick</p>
+      <p style="line-height:1.9;">Zinnkraut · Schafgarbe · Brennnessel (Blätter) · Brennnessel (Samen) · Brennnessel (Wurzel) · Goldrute · Ringelblume · Baldrianwurzel · Enzianwurzel · Mädesüß · Mädesüßwurzel · Johanniskraut · Lavendel · Löwenzahn · Löwenzahnwurzel · Spitzwegerich · Spitzwegerichwurzel · Weidenrinde · Brombeerblätter · Krauseminze · Rotklee · Walnussblätter · Birkenblätter · Topinambur · Topinamburwurzel · Hagebutten · Wiesen-Flockenblume · Wilde Möhre (Blätter) · Wilde Möhre (Blüten) · Wilde Möhre (Wurzel)</p>
+
+      <p class="bio-subhead">Im Detail</p>
+
+      <div class="herb-card">
+        <p class="herb-name">Zinnkraut (Ackerschachtelhalm) <span class="herb-meta">· Kraut · Bindegewebe &amp; Haut</span></p>
+        <p class="herb-effect">Stärkt Sehnen, Bänder und Hufe durch hohe Kieselsäurewerte. Unterstützt den Fellwechsel.</p>
+        <p class="herb-warning">⚠ Darf nicht mit dem giftigen Sumpfschachtelhalm verwechselt werden.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Schafgarbe <span class="herb-meta">· Kraut/Blüten · Magen &amp; Darm</span></p>
+        <p class="herb-effect">Enthält Bitterstoffe, wirkt krampflösend und verdauungsfördernd. Gut bei Blähungen.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Brennnessel <span class="herb-meta">· Blätter · Stoffwechsel &amp; Niere</span></p>
+        <p class="herb-effect">Stark blutreinigend, harntreibend und entschlackend.</p>
+        <p class="herb-warning">⚠ Welk oder getrocknet füttern (verliert Brennhaare).</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Brennnessel <span class="herb-meta">· Samen · Vitalität &amp; Aufbau</span></p>
+        <p class="herb-effect">Sehr proteinreich, liefert Energie, wirkt als natürliches Aufbaumittel für geschwächte Pferde.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Brennnessel <span class="herb-meta">· Wurzel · Prostata &amp; Gelenke</span></p>
+        <p class="herb-effect">Wirkt hormonregulierend und unterstützt bei entzündlichen Gelenkprozessen.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Goldrute <span class="herb-meta">· Kraut · Niere &amp; Harnwege</span></p>
+        <p class="herb-effect">Durchspülungstherapie bei Harnwegsinfekten, regt die Nierenfunktion an.</p>
+        <p class="herb-warning">⚠ Nicht bei Wasseransammlungen (Ödemen) durch Herzinsuffizienz.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Ringelblume <span class="herb-meta">· Blüten · Haut &amp; Magen</span></p>
+        <p class="herb-effect">Äußerlich stark wundheilend (Salben), innerlich entzündungshemmend für die Magenschleimhaut.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Baldrian <span class="herb-meta">· Wurzel · Nervensystem</span></p>
+        <p class="herb-effect">Sehr starkes Beruhigungsmittel bei Stress, Angst oder Nervosität.</p>
+        <p class="herb-warning">⚠ Dopingrelevant im Turniersport (FN-Richtlinien beachten).</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Enzian <span class="herb-meta">· Wurzel · Verdauung</span></p>
+        <p class="herb-effect">Einer der stärksten Bitterstofflieferanten, regt Magensäfte und Appetit extrem an.</p>
+        <p class="herb-warning">⚠ Nicht bei Magengeschwüren anwenden.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Mädesüß <span class="herb-meta">· Kraut · Schmerz &amp; Entzündung</span></p>
+        <p class="herb-effect">Natürliche Salicylsäureverbindung. Wirkt schmerzlindernd, entzündungshemmend, magenschonend.</p>
+        <p class="herb-warning">⚠ Dopingrelevant.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Mädesüß <span class="herb-meta">· Wurzel · Schmerz &amp; Gelenke</span></p>
+        <p class="herb-effect">Ähnliche Wirkung wie das Kraut, oft intensiver bei Gelenkproblematiken (Arthrose).</p>
+        <p class="herb-warning">⚠ Dopingrelevant.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Johanniskraut <span class="herb-meta">· Kraut/Blüten · Nervensystem</span></p>
+        <p class="herb-effect">Stimmungsaufhellend und nervenstärkend. Äußerlich als Rotöl bei Wunden.</p>
+        <p class="herb-warning">⚠ Kann bei hellen Pferden/Abzeichen Lichtempfindlichkeit (Fotosensibilität) auslösen!</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Lavendel <span class="herb-meta">· Blüten · Nerven &amp; Magen</span></p>
+        <p class="herb-effect">Milde Beruhigung, krampflösend im Magen-Darm-Trakt.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Löwenzahn <span class="herb-meta">· Blätter · Leber &amp; Galle</span></p>
+        <p class="herb-effect">Regt den Gallenfluss an, unterstützt die Leberentgiftung stark.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Löwenzahn <span class="herb-meta">· Wurzel · Darmflora &amp; Leber</span></p>
+        <p class="herb-effect">Enthält zusätzlich viel Inulin (Präbiotikum) für den Darmaufbau, starke Leberwirkung.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Spitzwegerich <span class="herb-meta">· Blätter · Atemwege &amp; Haut</span></p>
+        <p class="herb-effect">Schleimlösend und reizlindernd bei Husten. Äußerlich als natürliches "Pflaster" bei Insektenstichen.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Spitzwegerich <span class="herb-meta">· Wurzel · Atemwege</span></p>
+        <p class="herb-effect">Intensive Unterstützung der tiefen Atemwege.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Weidenrinde <span class="herb-meta">· Rinde · Schmerz &amp; Gelenke</span></p>
+        <p class="herb-effect">Hauptlieferant für Salicin. Stark bei Arthrose, Spat, Hufrollenentzündung.</p>
+        <p class="herb-warning">⚠ Dopingrelevant. Kann empfindliche Mägen reizen (Mädesüß ist magenschonender).</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Brombeerblätter <span class="herb-meta">· Blätter · Darm</span></p>
+        <p class="herb-effect">Reich an Gerbstoffen, zieht Schleimhäute zusammen, hilft bei weichem Kot / Kotwasser.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Krauseminze <span class="herb-meta">· Blätter · Magen &amp; Darm</span></p>
+        <p class="herb-effect">Krampflösend, beruhigt den Magen. Milder als Pfefferminze, da weniger Menthol.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Rotklee <span class="herb-meta">· Blüten/Kraut · Stoffwechsel</span></p>
+        <p class="herb-effect">Enthält Phytoöstrogene, blutreinigend, leicht schleimlösend.</p>
+        <p class="herb-warning">⚠ In großen Mengen hormonell wirksam, moderat füttern.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Walnussblätter <span class="herb-meta">· Blätter · Darm &amp; Parasiten</span></p>
+        <p class="herb-effect">Gerbstoffreich bei Durchfall, unterstützt ein wurmfeindliches Darmmilieu.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Birkenblätter <span class="herb-meta">· Blätter · Niere &amp; Gelenke</span></p>
+        <p class="herb-effect">Stark wasser- und harntreibend. Wird oft bei rheumatischen Beschwerden eingesetzt.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Topinambur <span class="herb-meta">· Kraut · Stoffwechsel</span></p>
+        <p class="herb-effect">Raufutterersatz, reguliert den Blutzuckerspiegel leicht.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Topinambur <span class="herb-meta">· Wurzel · Darmflora</span></p>
+        <p class="herb-effect">Sehr hoher Inulingehalt. Dient den guten Darmbakterien als Nahrung (Präbiotikum).</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Hagebutten <span class="herb-meta">· Früchte · Immunsystem &amp; Hufe</span></p>
+        <p class="herb-effect">Extrem hoher Vitamin-C-Gehalt, liefert Galaktolipide für die Gelenkschmiere.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Wiesen-Flockenblume <span class="herb-meta">· Kraut/Blüten · Verdauung</span></p>
+        <p class="herb-effect">Milde Bitter- und Gerbstoffe, appetitanregend und leicht harntreibend.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Wilde Möhre <span class="herb-meta">· Blätter · Niere</span></p>
+        <p class="herb-effect">Mild harntreibend, unterstützt die Nierenfunktion.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Wilde Möhre <span class="herb-meta">· Blüten · Stoffwechsel</span></p>
+        <p class="herb-effect">Verdauungsfördernd und leicht stoffwechselanregend.</p>
+      </div>
+
+      <div class="herb-card">
+        <p class="herb-name">Wilde Möhre <span class="herb-meta">· Wurzel · Darm &amp; Parasiten</span></p>
+        <p class="herb-effect">Wird traditionell (wie die Karotte) zur Unterstützung gegen Parasiten/Würmer genutzt.</p>
+      </div>
+
+      <p class="disclaimer" style="margin-top:14px;">Wichtig: Diese Angaben dienen der allgemeinen Orientierung und ersetzen keine tierärztliche Diagnose oder Behandlung. Bei Vorerkrankungen, Medikamentengabe oder Turnierstarts bitte vorher tierärztlichen Rat einholen.</p>
     </div>
   </div>
 </div>
@@ -947,6 +1159,26 @@ FOTOS:
   contactClose.addEventListener('click', closeContact);
   contactOverlay.addEventListener('click', (e) => {
     if (e.target === contactOverlay) closeContact();
+  });
+
+  const kraeuterToggle = document.getElementById('kraeuterToggle');
+  const kraeuterOverlay = document.getElementById('kraeuterOverlay');
+  const kraeuterClose = document.getElementById('kraeuterClose');
+
+  function openKraeuter() {
+    kraeuterOverlay.classList.add('open');
+    kraeuterToggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeKraeuter() {
+    kraeuterOverlay.classList.remove('open');
+    kraeuterToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  kraeuterToggle.addEventListener('click', openKraeuter);
+  kraeuterClose.addEventListener('click', closeKraeuter);
+  kraeuterOverlay.addEventListener('click', (e) => {
+    if (e.target === kraeuterOverlay) closeKraeuter();
   });
 
   const waitlistToggle = document.getElementById('waitlistToggle');
